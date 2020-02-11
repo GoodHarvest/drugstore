@@ -1,0 +1,412 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>便民药店</title>
+
+    <!--图标样式和布局-->
+    <link href="https://lib.baomitu.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!--公共样式-->
+
+    <style type="text/css">
+        .demo {
+            padding: 2em;
+            background: #fff;
+        }
+
+        .serviceBox {
+            border: 1px solid #ededed;
+            padding: 15px 15px 15px 15px;
+            position: relative;
+            transition: all 0.5s ease 0s;
+        }
+
+            .serviceBox:hover {
+                border-color: #41d7f7;
+            }
+
+            .serviceBox:before,
+            .serviceBox:after {
+                content: "";
+                display: block;
+                width: 50px;
+                height: 5px;
+                background: #41d7f7;
+                position: absolute;
+                left: 0;
+                opacity: 0;
+                transition: all 0.5s ease 0s;
+            }
+
+            .serviceBox:before {
+                top: -3px;
+            }
+
+            .serviceBox:after {
+                bottom: -3px;
+            }
+
+            .serviceBox:hover:before,
+            .serviceBox:hover:after {
+                left: 40px;
+                opacity: 1;
+            }
+
+            .serviceBox .service-icon {
+                display: inline-block;
+                position: absolute;
+                top: 33%;
+                left: 23px;
+                font-size: 45px;
+                color: #41d7f7;
+                opacity: 0.3;
+                transition: all 0.5s ease-in 0s;
+            }
+
+            .serviceBox:hover .service-icon {
+                opacity: 1;
+            }
+
+            .serviceBox .title {
+                font-size: 15px;
+                font-weight: 700;
+                color: #41d7f7;
+                margin-bottom: 15px;
+            }
+
+            .serviceBox .distance {
+                font-size: 15px;
+                font-weight: 700;
+                color: olive;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+
+            .serviceBox .description {
+                font-size: 13px;
+                color: #666;
+                line-height: 20px;
+                text-decoration: underline;
+            }
+
+        @media only screen and (max-width: 990px) {
+            .serviceBox {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="demo">
+        <div class="container">
+            <div class="row" id="rows">
+
+
+                <!--<div class="col-md-4 col-sm-6">
+                    <div class="serviceBox">
+                        <div class="service-Content">
+                            <p class="distance">
+                                距离您139km
+                            </p>
+                            <h3 class="title">
+                                中国医学科学院北京协和医院东单院区
+                            </h3>
+                            <p class="description" onclick="window.open('http://www.baidu.com')">
+                                北京市西城区地安门外大街139号 
+                            </p>
+                            <a class="description" href="tel:18688888888">
+                                拨打:18688888888
+                            </a>
+                        </div>
+                    </div>
+                </div>-->
+
+            </div>
+        </div>
+    </div>
+    <script src="https://lib.baomitu.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        var drugstores = [{
+
+            "Star_Name_P": "金象大药房赵登禹路店",
+            "地址": "北京市西城区赵登禹路冠英园西区29号楼1层",
+            "纬度": 39.944068,
+            "经度": 116.374677,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/0d/hKw",
+            "电话": "01066251731",
+        },
+        {
+            
+            "Star_Name_H": "首都医科大学中医药学院附属鼓楼中医医院",
+            "Star_Name_P": "北京金象大药房医药连锁有限责任公司地外药房",
+            "地址": "北京市西城区地安门外大街139号 ",
+            "纬度": 39.940554,
+            "经度": 116.402365,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/33/bKw",
+            "电话": "01084016050",
+        },
+        {
+            
+            "Star_Name_H": "北京中医药大学附属护国寺中医医院",
+            "Star_Name_P": "北京金象大药房医药连锁有限责任公司新街口药房",
+            "地址": "北京市西城区新街口南大街10号",
+            "纬度": 39.946504,
+            "经度": 116.379395,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/f2/Q9o",
+            "电话": "01083227289",
+        },
+        {
+            
+            "Star_Name_H": "中国人民解放军总医院第七医学中心",
+            "Star_Name_P": "北京金象大药房医药连锁有限责任公司东兴店",
+            "地址": "北京市东城区豆瓣胡同5号楼5-1号",
+            "纬度": 39.932979,
+            "经度": 116.438341,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/2d/2cw",
+            "电话": "01084069618",
+        },
+        {
+            
+            "Star_Name_H": "北京市第二医院",
+            "Star_Name_P": "北京金象大药房医药连锁有限责任公司西单药房",
+            "地址": "北京市西城区西单北大街114号",
+            "纬度": 39.919517,
+            "经度": 116.380862,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/bb/2VA",
+            "电话": "01066077021",
+        },
+        {
+            
+            "Star_Name_H": "北京市东城区第一妇幼保健院",
+            "Star_Name_P": "北京金象大药房医药连锁有限责任公司东内店",
+            "地址": "北京市东城区东直门内北小街22号一层",
+            "纬度": 39.94922,
+            "经度": 116.432386,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/d0/QYv",
+            "电话": "01084060364",
+        },
+        {
+            
+            "Star_Name_H": "中国医学科学院北京协和医院西院",
+            "Star_Name_P": "北京金象大药房医药连锁有限责任公司丰汇园店",
+            "地址": "北京市西城区辟才胡同丰汇园9号楼1层",
+            "纬度": 39.92124785,
+            "经度": 116.37287485,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/89/mtw",
+            "电话": "01066126697",
+        },
+        {
+            
+            "Star_Name_H": "中国人民解放军第三0五医院",
+            "Star_Name_P": "北京金象大药房连锁有限责任公司西四北店",
+            "地址": "北京市西城区西四北大街3号",
+            "纬度": 39.93793,
+            "经度": 116.379319,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/9c/kuw",
+            "电话": "01066180663",
+        },
+        {
+            
+            "Star_Name_H": "北京市隆福医院",
+            "Star_Name_P": "北京欣隆福医药销售有限公司",
+            "地址": "北京市东城区美术馆东街7号",
+            "纬度": 39.932737,
+            "经度": 116.416939,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/62/Fcw",
+            "电话": "01064041606",
+        },
+        {
+            
+            "Star_Name_H": "北京大学第一医院",
+            "Star_Name_P": "北京市亿顺堂大药房有限公司",
+            "地址": "北京市西城区西什库大街26号院10号楼一层",
+            "纬度": 39.932315,
+            "经度": 116.386761,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/aa/x9k",
+            "电话": "01066005585",
+        },
+        {
+            
+            "Star_Name_H": "首都医科大学宣武医院",
+            "Star_Name_P": "北京润春堂医药有限公司",
+            "地址": "北京市西城区长椿街甲18号1号楼1层",
+            "纬度": 39.899781,
+            "经度": 116.370251,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/01/_iw",
+            "电话": "01083122987",
+        },
+        {
+            
+            "Star_Name_H": "中国医学科学院北京协和医院东单院区",
+            "Star_Name_P": "北京协和精细化学制品有限公司协和大药房",
+            "地址": "北京市东城区东单北大街69-5",
+            "纬度": 39.917859,
+            "经度": 116.42408,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/52/cnw",
+            "电话": "01065123620",
+        },
+        {
+            
+            "Star_Name_H": "北京德恒门诊部",
+            "Star_Name_P": "北京白塔寺药店东单医药有限公司",
+            "地址": "北京市东城区东单北大街68号",
+            "纬度": 39.91730414,
+            "经度": 116.42413573,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/35/7lw",
+            "电话": "01065598688",
+        },
+        {
+            
+            "Star_Name_H": "北京市第六医院",
+            "Star_Name_P": "北京永安堂医药连锁有限责任公司交道口药店",
+            "地址": "北京市东城区安定门内大街245号",
+            "纬度": 39.94885,
+            "经度": 116.414605,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/58/siw",
+            "电话": "01064041266",
+        },
+        {
+            
+            "Star_Name_H": "北京市和平里医院",
+            "Star_Name_P": "北京永安堂医药连锁有限责任公司和平里店",
+            "地址": "北京市东城区兴化东里化工大院14号楼",
+            "纬度": 39.965847,
+            "经度": 116.424316,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/16/Rlw",
+            "电话": "01064212678",
+        },
+        {
+            
+            "Star_Name_H": "首都医科大学附属北京中医医院",
+            "Star_Name_P": "北京永安堂医药连锁有限责任公司宽街药店",
+            "地址": "北京市东城区交道口南大街丁69号",
+            "纬度": 39.942289,
+            "经度": 116.414738,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/3d/8Wv",
+            "电话": "01064042564",
+        },
+        {
+            
+            "Star_Name_H": "北京中医药大学东直门医院",
+            "Star_Name_P": "北京永安堂医药连锁有限责任公司东四十条药店",
+            "地址": "北京市东城区东四十条28号",
+            "纬度": 39.939292,
+            "经度": 116.434777,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/e2/fMw",
+            "电话": "01084032025",
+        },
+		{
+            
+            "Star_Name_H": "中国人民解放军火箭军特色医学中心",
+            "Star_Name_P": "北京鹤安长泰大药房有限公司积水潭店",
+            "地址": "北京市西城区冰窖口胡同8号院8号楼103",
+            "纬度": 39.956114,
+            "经度": 116.378873,
+            "距离": 0,
+            "BaiduMapUrl": "https://j.map.baidu.com/0c/9mv",
+            "电话": "01062029081",
+        }
+		
+        ];
+
+        // 计算两个经纬度之间的直线距离
+        function GetDistance(lat1, lng1, lat2, lng2) {
+            var radLat1 = lat1 * Math.PI / 180.0;
+            var radLat2 = lat2 * Math.PI / 180.0;
+            var a = radLat1 - radLat2;
+            var b = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0;
+            var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +
+                Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+            s = s * 6378.137;// EARTH_RADIUS;
+            s = Math.round(s * 10000) / 10000;
+            return s;
+        }
+        //默认天安门坐标
+
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+            else {
+                var mine_lat = 39.9152108900;
+                var mine_lng = 116.4039006800;
+                push(mine_lat, mine_lng);
+            }
+        }
+        function showPosition(position) {
+            var mine_lat = position.coords.latitude;
+            var mine_lng = position.coords.longitude;
+            console.log(mine_lat);
+            console.log(mine_lng);
+            push(mine_lat, mine_lng);
+        }
+        //push();
+
+        getLocation();
+
+        //按照升序排列
+        function up(x, y) {
+            return x.距离 - y.距离;
+        }
+        function push(mine_lat, mine_lng) {
+            //计算每个药店的距离
+            for (var i = 0; i < drugstores.length; i++) {
+                var drugstore = drugstores[i];
+                drugstore.距离 = GetDistance(mine_lat, mine_lng, drugstore.纬度, drugstore.经度);
+            }
+
+            //根据距离升序排序
+            drugstores.sort(up);
+            for (var i = 0; i < drugstores.length; i++) {
+                var drugstore = drugstores[i];
+                var html = '<div class="col-sm-4 col-sm-6" ><div class="serviceBox"><div class="service-Content"> <p class="distance">距离您' + drugstore.距离 + 'km</p><h3 class="title">' + drugstore.Star_Name_P + '</h3><p class="description"  onclick="window.open(\'' + drugstore.BaiduMapUrl + '\')">' + drugstore.地址 + '</p> <a class="description" href="tel:' + drugstore.电话 + '">拨打:' + drugstore.电话 + '</a></div></div></div>';
+                $("#rows").append(html);
+            }
+        }
+    </script>
+
+
+    <!--<div class="col-md-4 col-sm-6">
+        <div class="serviceBox">
+            <div class="service-Content">
+                <p class="distance">
+                    距离您139km
+                </p>
+                <h3 class="title">
+                    中国医学科学院北京协和医院东单院区
+                </h3>
+                <p class="description" onclick="window.open('http://www.baidu.com')">
+                    北京市西城区地安门外大街139号 
+                </p>
+                <a class="description" href="tel:18688888888">
+                    拨打:18688888888
+                </a>
+            </div>
+        </div>
+    </div>-->
+
+</body>
+</html>
